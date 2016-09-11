@@ -60,7 +60,7 @@ propVectorToMatrix = function(p, levs) {
 #' @return [\code{character}].
 #' @export
 listTaskTypes = function() {
-  c("classif", "regr", "surv", "costsens", "cluster", "multilabel")
+  c("classif", "regr", "surv", "costsens", "cluster", "multilabel", "fcregr", "mfcregr")
 }
 
 # Maybe move to BBmisc at some point
@@ -93,4 +93,12 @@ suppressWarning = function(expr, str) {
     if (stri_detect_fixed(stri_flatten(w$message), str))
       invokeRestart("muffleWarning")
   })
+}
+# combine two data frames by the difference in cns and num
+# typically used in preprocessing for numeric variables
+cbindSetDiff <- function(x, data, cns, nums) {
+  x = as.data.frame(x)
+  colnames(x) = nums
+  data = data[, setdiff(cns, nums), drop = FALSE]
+  cbind(data, x)
 }

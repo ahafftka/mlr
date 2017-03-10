@@ -112,7 +112,7 @@ updateModel = function(object, task, newdata, subset, weights = NULL, ...) {
   # no vars? then use no vars model
 
   if (length(vars) == 0L && learner$type != "fcregr") {
-    learner.model = makeNoFeaturesModel(targets = task$env$data[subset, tn], task.desc = getTaskDescription(task))
+    learner.model = makeNoFeaturesModel(targets = task$env$data[subset, tn], task.desc = getTaskDesc(task))
     time.train = 0
   } else {
     opts = getLearnerOptions(learner, c("show.learner.output", "on.learner.error", "on.learner.warning"))
@@ -136,7 +136,7 @@ updateModel = function(object, task, newdata, subset, weights = NULL, ...) {
     time.train = as.numeric(st[3L])
   }
   factor.levels = getTaskFactorLevels(task)
-  makeWrappedModel(learner, learner.model, getTaskDescription(task), subset, vars, factor.levels, time.train)
+  makeWrappedModel(learner, learner.model, getTaskDesc(task), subset, vars, factor.levels, time.train)
 
 
 }

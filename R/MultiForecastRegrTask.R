@@ -1,10 +1,10 @@
 #' Create an task object for multivariate forecasting.
 #'
+#' @rdname Task
 #' @description Creates a task that is used for multivariate forecasting. Target the name of a single series
 #' or 'All'. Targeting a single series will produce a single output similar to univariate tasks while
 #' treating all other variables endogeneously. targeting 'All' will forecast all variables forward.
 #' @export
-#' @rdname Task
 #' @importFrom zoo index coredata
 makeMultiForecastRegrTask = function(id = deparse(substitute(data)), data, target,
                                 weights = NULL, blocking = NULL, fixup.data = "warn",

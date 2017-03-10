@@ -236,13 +236,13 @@ makePrediction.ForecastRegrTaskDesc = function(task.desc, row.names, id, truth, 
   }
 
   makeS3Obj(c("PredictionForecastRegr", "Prediction"),
-            predict.type = predict.type,
-            data = setRowNames(as.data.frame(data, row.names = NULL), row.names),
-            threshold = NA_real_,
-            task.desc = task.desc,
-            time = time,
-            error = error,
-            dump = dump
+    predict.type = predict.type,
+    data = setRowNames(as.data.frame(data, row.names = NULL), row.names),
+    threshold = NA_real_,
+    task.desc = task.desc,
+    time = time,
+    error = error,
+    dump = dump
   )
 }
 

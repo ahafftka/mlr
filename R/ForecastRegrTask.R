@@ -1,8 +1,8 @@
 #' Create a task for univariate forecasting
 #'
+#' @rdname Task
 #' @description Creates a task for univariate forecasting learners
 #' @export
-#' @rdname Task
 #' @importFrom zoo index coredata
 makeForecastRegrTask = function(id = deparse(substitute(data)), data, target,
                                 weights = NULL, blocking = NULL, frequency = 1L, fixup.data = "warn",

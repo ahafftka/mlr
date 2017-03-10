@@ -61,11 +61,11 @@ test_that("forecast with regular tasks", {
   cp5c = setThreshold(cp5b, 0)
   cp5d = setThreshold(cp5b, 1)
   expect_equal(cp5a$data$response, cp5b$data$response)
-  f1 = factor(rep(getTaskDescription(binaryclass.task.lag)$positive, length(binaryclass.test.inds.lag)),
+  f1 = factor(rep(getTaskDesc(binaryclass.task.lag)$positive, length(binaryclass.test.inds.lag)),
               levels = getTaskClassLevels(binaryclass.task.lag))
   expect_equal(cp5c$data$response, f1)
-  f2 = factor(rep(getTaskDescription(binaryclass.task.lag)$negative, length(binaryclass.test.inds.lag)),
-              levels = getTaskDescription(binaryclass.task.lag)$class.levels)
+  f2 = factor(rep(getTaskDesc(binaryclass.task.lag)$negative, length(binaryclass.test.inds.lag)),
+              levels = getTaskDesc(binaryclass.task.lag)$class.levels)
   expect_equal(cp5d$data$response, f2)
 })
 

@@ -149,7 +149,7 @@ checkTaskData = function(data, cols = names(data)) {
     } else if (is.factor(x)) {
       if (any(table(x) == 0L))
         stopf("Column '%s' contains empty factor levels.", cn)
-    } else if (is.POSIXt(x)){
+    } else if (is.POSIXt(x)) {
       if (any(duplicated(x)))
         warning(catf("There are duplicate dates for %s", x[duplicated(x)]))
     } else {

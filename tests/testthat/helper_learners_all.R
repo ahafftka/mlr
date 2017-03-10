@@ -82,7 +82,7 @@ testBasicLearnerProperties = function(lrn, task, hyperpars, pred.type = "respons
   # check that quantile works and is > 0
   if (pred.type == "quantile") {
     quantiles = p$data[,2:ncol(p$data)]
-    for (i in 1:ncol(quantiles)){
+    for (i in 1:ncol(quantiles)) {
       expect_numeric(info = info, quantiles[,1], lower = Inf, finite = TRUE,
                      any.missing = FALSE, len = getTaskSize(task))
     }
@@ -162,14 +162,14 @@ testThatLearnerHandlesMissings = function(lrn, task, hyperpars) {
   testBasicLearnerProperties(lrn = lrn, task = task, hyperpars = hyperpars)
 }
 
-# Test that the extraction of the out-of-bag predictions for the learner that supports 
+# Test that the extraction of the out-of-bag predictions for the learner that supports
 # this works correctly
 
 testThatGetOOBPredsWorks = function(lrn, task) {
   type = lrn$type
   mod = train(lrn, task)
   oob = getOOBPreds(mod, task)
-  
+
   if (type == "classif") {
     if(lrn$predict.type == "response") {
       expect_is(oob$data, "data.frame")
@@ -181,7 +181,7 @@ testThatGetOOBPredsWorks = function(lrn, task) {
   } else {
     if (type %in% c("regr", "surv")) {
       expect_is(oob$data$response, "numeric")
-    } 
+    }
   }
   expect_equal(nrow(oob$data), nrow(getTaskData(task)))
 }

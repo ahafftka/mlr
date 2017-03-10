@@ -101,7 +101,7 @@ trainLearner.fcregr.garch = function(.learner, .task, .subset, .weights = NULL, 
   data$target = ts(data$target, start = 1, frequency = .task$task.desc$frequency)
 
   garch.fit.args = c(dots, spec = list(spec), fit.control = list(fit.ctrl.args))
-  garch.fun = function(...){
+  garch.fun = function(...) {
     rugarch::ugarchfit(data = data$target, ...)
   }
   do.call(garch.fun,garch.fit.args)
@@ -111,7 +111,7 @@ trainLearner.fcregr.garch = function(.learner, .task, .subset, .weights = NULL, 
 predictLearner.fcregr.garch = function(.learner, .model, .newdata, ...) {
 
   se.fit = .learner$predict.type == "quantile"
-  if (!se.fit){
+  if (!se.fit) {
     garchForecast = rugarch::ugarchforecast(.model$learner.model, ...)
     p = as.numeric(garchForecast@forecast$seriesFor)
   } else {

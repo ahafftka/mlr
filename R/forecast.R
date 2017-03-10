@@ -76,9 +76,9 @@ forecast.WrappedModel = function(object, newdata = NULL, task, h = 10, ...) {
   if (is.null(td$pre.proc))
     stop("Forecasting requires lags")
 
-  if (!is.null(newdata)){
+  if (!is.null(newdata)) {
     ##FIXME: Better way to make into a data frame? This doesn't protect against a lot of things
-    if (xts::is.xts(newdata)){
+    if (xts::is.xts(newdata)) {
       warningf("Provided data for prediction is not a pure data.frame but from class %s, hence it will be converted.",  class(newdata)[1])
       newdata = as.data.frame(newdata, row.names = as.character(index(newdata)))
       assertDataFrame(newdata, min.rows = 1L)
@@ -113,7 +113,7 @@ forecast.WrappedModel = function(object, newdata = NULL, task, h = 10, ...) {
 
   # This just cuts the amount of data we need to use
   data = td$pre.proc$data.original[,td$target, drop = FALSE]
-  if (is.null(truth)){
+  if (is.null(truth)) {
     row.names = rownames(data)
     sec = lubridate::dseconds(lubridate::int_diff(as.POSIXct(row.names)))
     # We take the median seconds between intervals as this won't get
@@ -163,7 +163,7 @@ forecast.WrappedModel = function(object, newdata = NULL, task, h = 10, ...) {
 
 makeForecast = function(.data, .newdata, .proc.vals, .h, .td, .model, ...) {
   forecasts = list()[1:I(.h)]
-  for (i in 1:(.h)){
+  for (i in 1:(.h)) {
 
     .data = rbind(.data,NA)
     # The dates here will be thrown away later
@@ -172,7 +172,7 @@ makeForecast = function(.data, .newdata, .proc.vals, .h, .td, .model, ...) {
     colnames(dat.xts) = .td$target
 
     # get lag structure
-    lagdiff.func = function(...){
+    lagdiff.func = function(...) {
       createLagDiffFeatures(obj = dat.xts,...)
     }
     data.lag = do.call(lagdiff.func, .proc.vals)
@@ -184,17 +184,17 @@ makeForecast = function(.data, .newdata, .proc.vals, .h, .td, .model, ...) {
     # predict
     pred = predict(.model, newdata = data.step)
 
-    if (pred$predict.type == "response"){
+    if (pred$predict.type == "response") {
       forecasts[[i]] = pred$data
       .data[nrow(.data),] = pred$data$response
-    } else if (pred$predict.type == "prob"){
+    } else if (pred$predict.type == "prob") {
       #FIXME: I don't know regex well enough to do this in one sweep
       colnames(pred$data) = stringr::str_replace(colnames(pred$data),"prob","")
       colnames(pred$data) = stringr::str_replace(colnames(pred$data),"[.]","")
       .data[nrow(.data),] =pred$data$response
       pred$data$response = NULL
       forecasts[[i]] = pred$data
-    } else if (pred$predict.type == "se"){
+    } else if (pred$predict.type == "se") {
       forecasts[[i]] = pred$data
       .data[nrow(.data),] = pred$data$response
     }

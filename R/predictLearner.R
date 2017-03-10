@@ -97,7 +97,7 @@ checkPredictLearnerOutput = function(learner, model, p) {
       if (ncol(p) != 2L)
         stopf("predictLearner for %s has not returned a numeric matrix with 2 columns!", learner$id)
     }
-  } else if (learner$type == "fcregr"){
+  } else if (learner$type == "fcregr") {
     if (learner$predict.type == "response") {
       if (cl != "numeric" & cl != "ts")
         stopf("predictLearner for %s has returned a class %s instead of a numeric!", learner$id, cl)
@@ -107,7 +107,7 @@ checkPredictLearnerOutput = function(learner, model, p) {
       if (ncol(p) < 2L)
         stopf("predictLearner for %s has not returned a numeric matrix with more than 2 columns!", learner$id)
     }
-  } else if (learner$type == "mfcregr"){
+  } else if (learner$type == "mfcregr") {
     if (learner$predict.type == "response") {
       if (cl != "matrix" & cl != "numeric")
         stopf("predictLearner for %s has returned a class %s instead of numeric or matrix!", learner$id, cl)

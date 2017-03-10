@@ -32,8 +32,8 @@ makeCostSensTask(id = deparse(substitute(data)), data, costs,
   blocking = NULL, fixup.data = "warn", check.data = TRUE)
 
 makeForecastRegrTask(id = deparse(substitute(data)), data, target,
-  weights = NULL, blocking = NULL, fixup.data = "warn",
-  check.data = TRUE, frequency = 1L)
+  weights = NULL, blocking = NULL, frequency = 1L, fixup.data = "warn",
+  check.data = TRUE)
 
 makeMultiForecastRegrTask(id = deparse(substitute(data)), data, target,
   weights = NULL, blocking = NULL, fixup.data = "warn",

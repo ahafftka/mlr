@@ -31,9 +31,9 @@ makeMultiForecastRegrTask = function(id = deparse(substitute(data)), data, targe
   if (fixup.data != "no" && all(!is.target.all)) {
     if (is.integer(data[[target]]))
       data[[target]] = as.double(data[[target]])
-  } else if (fixup.data != "no"){
+  } else if (fixup.data != "no") {
     is.int = vlapply(data, is.integer)
-    if (all(is.int)){
+    if (all(is.int)) {
       data = lapply(data, as.double)
       data = as.data.frame(row.names = row.names, data)
     }
@@ -46,7 +46,7 @@ makeMultiForecastRegrTask = function(id = deparse(substitute(data)), data, targe
 
   if (check.data && !is.target.all) {
     assertNumeric(data[[target]], any.missing = FALSE, finite = TRUE, .var.name = target)
-  } else if (check.data && is.target.all){
+  } else if (check.data && is.target.all) {
     lapply(data,assertNumeric, any.missing = FALSE, finite = TRUE)
   }
 

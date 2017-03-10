@@ -69,7 +69,7 @@ testSimple = function(t.name, df, target, train.inds, old.predicts, parset = lis
   set.seed(getOption("mlr.debug.seed"))
   m = try(train(lrn, task, subset = inds))
 
-  if (inherits(m, "FailureModel")){
+  if (inherits(m, "FailureModel")) {
     expect_is(old.predicts, "try-error")
   } else {
     set.seed(getOption("mlr.debug.seed"))
@@ -81,7 +81,7 @@ testSimple = function(t.name, df, target, train.inds, old.predicts, parset = lis
     } else if (any(class(task) == "MultiForecastRegrTask")) {
       expect_equal(unname(as.matrix(cp$data[, substr(colnames(cp$data), 1, 8) == "response"]), force = TRUE),
                    unname(as.matrix(old.predicts)))
-    } else if (is.numeric(cp$data$response) && is.numeric(old.predicts)){
+    } else if (is.numeric(cp$data$response) && is.numeric(old.predicts)) {
       expect_equal(unname(cp$data$response), unname(old.predicts), tol = 1e-5)
     } else{
       expect_equal(as.character(cp$data$response), as.character(old.predicts))
@@ -291,7 +291,7 @@ testSimpleUpdate = function(t.name, target, train.df, update.df,
   set.seed(getOption("mlr.debug.seed"))
   m = try(train(lrn, task))
   m = try(updateModel(m, task, update.df))
-  if (inherits(m, "FailureModel")){
+  if (inherits(m, "FailureModel")) {
     expect_is(old.predicts, "try-error")
   } else {
     set.seed(getOption("mlr.debug.seed"))

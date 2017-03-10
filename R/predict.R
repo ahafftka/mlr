@@ -52,7 +52,7 @@ predict.WrappedModel = function(object, task, newdata, subset = NULL, ...) {
     size = getTaskSize(task)
   } else {
     ##FIXME: Better way to make into a data frame? This doesn't protect against a lot of things
-    if (xts::is.xts(newdata)){
+    if (xts::is.xts(newdata)) {
       newdata = as.data.frame(newdata, row.names = as.character(index(newdata)))
       assertDataFrame(newdata, min.rows = 1L)
     } else if (class(newdata)[1] != "data.frame") {

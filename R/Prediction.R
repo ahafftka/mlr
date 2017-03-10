@@ -206,7 +206,7 @@ makePrediction.ForecastRegrTaskDesc = function(task.desc, row.names, id, truth, 
 
   # This will only happen when there is a task with no subset
   #  aka, we predict future values and have to get their times
-  if (length(truth) > size.y){
+  if (length(truth) > size.y) {
     sec = lubridate::dseconds(lubridate::int_diff(as.POSIXct(row.names)))
     # We take the median seconds between intervals as this won't get
     # a wrong day until about 200 months in the future.
@@ -252,14 +252,14 @@ makePrediction.ForecastRegrTaskDesc = function(task.desc, row.names, id, truth, 
 makePrediction.MultiForecastRegrTaskDesc = function(task.desc, row.names, id, truth, predict.type,
                                                     predict.threshold = NULL, y, time, error = NA_character_, dump = NULL) {
   data = namedList(c("id", "truth", "response", "se"))
-  if (class(y) != "matrix"){
+  if (class(y) != "matrix") {
     size.y = length(y)
   } else {
     size.y = nrow(y)
   }
   # FIXME: This is kind of gross and should be done better
-  if (!is.null(truth)){
-    if (class(truth) != "data.frame" && class(truth) != "matrix"){
+  if (!is.null(truth)) {
+    if (class(truth) != "data.frame" && class(truth) != "matrix") {
         size.truth = length(truth)
       } else {
         size.truth = nrow(truth)
@@ -269,7 +269,7 @@ makePrediction.MultiForecastRegrTaskDesc = function(task.desc, row.names, id, tr
   }
   # This will only happen when there is a task with no subset
   #  aka, we predict future values and have to get their times
-  if (size.truth > size.y){
+  if (size.truth > size.y) {
     sec = lubridate::dseconds(lubridate::int_diff(as.POSIXct(row.names)))
     # We take the median seconds between intervals as this won't get
     # a wrong day until about 200 months in the future.

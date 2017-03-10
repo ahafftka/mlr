@@ -329,7 +329,7 @@ averageBaseLearners = function(learner, task) {
 
 # stacking where we predict the training set in-sample, then super-learn on that
 stackNoCV = function(learner, task) {
-  td = getTaskDescription(task)
+  td = getTaskDesc(task)
   type = checkStackSupport(td)
   bls = learner$base.learners
   use.feat = learner$use.feat
@@ -372,7 +372,7 @@ stackNoCV = function(learner, task) {
 
 # stacking where we crossval the training set with the base learners, then super-learn on that
 stackCV = function(learner, task) {
-  td = getTaskDescription(task)
+  td = getTaskDesc(task)
   type = checkStackSupport(td)
   bls = learner$base.learners
   use.feat = learner$use.feat
@@ -426,7 +426,7 @@ hillclimbBaseLearners = function(learner, task, replace = TRUE, init = 0, bagpro
   assertNumber(bagprob, lower = 0, upper = 1)
   assertInt(bagtime, lower = 1)
 
-  td = getTaskDescription(task)
+  td = getTaskDesc(task)
   type = checkStackSupport(td)
   if (is.null(metric)) {
     if (type == "regr" || type == "fcregr") {
@@ -589,7 +589,7 @@ getResponse = function(pred, full.matrix = TRUE) {
       # return only vector of probabilities for binary classification
       return(getPredictionProbabilities(pred))
     }
-  } else if (pred$task.desc$type == "mfcregr"){
+  } else if (pred$task.desc$type == "mfcregr") {
     getPredictionResponse(pred)
   }else {
     # if regression task
@@ -729,7 +729,7 @@ getPseudoData = function(.data, k = 3, prob = 0.1, s = NULL, ...) {
 
 # stacking where we growing crossval the training set with the base learners, then super-learn on that
 stackGrowingCV = function(learner, task) {
-  td = getTaskDescription(task)
+  td = getTaskDesc(task)
   type = checkStackSupport(td)
   bls = learner$base.learners
   use.feat = learner$use.feat
@@ -796,7 +796,7 @@ stackGrowingCV = function(learner, task) {
 # - DONE: allow regression as well
 
 # check the learner type to see if it is supported
-checkStackSupport = function(td){
+checkStackSupport = function(td) {
   if (td$type == "regr") {
     type = "regr"
   } else if (td$type == "fcregr") {

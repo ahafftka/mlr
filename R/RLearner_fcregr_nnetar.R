@@ -52,15 +52,15 @@ makeRLearner.fcregr.nnetar = function() {
 trainLearner.fcregr.nnetar = function(.learner, .task, .subset, .weights = NULL, ...) {
   data = getTaskData(.task,.subset,target.extra = TRUE)
   data$target = ts(data$target, start = 1, frequency = .task$task.desc$frequency)
-  if (is.null(.weights)){
-    if (ncol(data$data) != 0){
+  if (is.null(.weights)) {
+    if (ncol(data$data) != 0) {
       data$data = ts(data$data, start = 1, frequency = .task$task.desc$frequency)
       forecast::nnetar(y = data$target,xreg = data$data, ...)
     } else {
       forecast::nnetar(y = data$target, ...)
     }
   } else {
-    if (ncol(data$data) != 0){
+    if (ncol(data$data) != 0) {
       data$data = ts(data$data, start = 1, frequency = .task$task.desc$frequency)
       forecast::nnetar(y = data$target,xreg = data$data, ...)
     } else {
@@ -75,15 +75,15 @@ trainLearner.fcregr.nnetar = function(.learner, .task, .subset, .weights = NULL,
 updateLearner.fcregr.nnetar = function(.learner, .model, .newdata, .task, .truth, .weights = NULL, ...) {
   target = getTaskTargetNames(.task)
   data = ts(.truth, start = 1, frequency = .task$task.desc$frequency)
-  if (is.null(.weights)){
-    if (ncol(.newdata) != 0){
+  if (is.null(.weights)) {
+    if (ncol(.newdata) != 0) {
       .newdata = ts(.newdata, start = 1, frequency = .task$task.desc$frequency)
       forecast::nnetar(y = data,xreg = .newdata, model = .model$learner.model, ...)
     } else {
       forecast::nnetar(y =data, model = .model$learner.model, ...)
     }
   } else {
-    if (ncol(.newdata) != 0){
+    if (ncol(.newdata) != 0) {
       newdata = ts(.newdata, start = 1, frequency = .task$task.desc$frequency)
       forecast::nnetar(y = data,xreg = newdata, model = .model$learner.model, weights = .weights, ...)
     } else {
@@ -95,9 +95,9 @@ updateLearner.fcregr.nnetar = function(.learner, .model, .newdata, .task, .truth
 #'@export
 predictLearner.fcregr.nnetar = function(.learner, .model, .newdata, ...) {
   se.fit = .learner$predict.type == "quantile"
-  model.td = getTaskDescription(.model)
+  model.td = getTaskDesc(.model)
 
-  if (all(model.td$n.feat == 0)){
+  if (all(model.td$n.feat == 0)) {
     if (se.fit)
       p = forecast::forecast(.model$learner.model, PI = TRUE, ...)
     else
@@ -109,7 +109,7 @@ predictLearner.fcregr.nnetar = function(.learner, .model, .newdata, ...) {
     else
       p = forecast::forecast(.model$learner.model, xreg = .newdata, ...)
   }
-  if (!se.fit){
+  if (!se.fit) {
     p = as.numeric(p$mean)
   } else {
     pMean  = as.matrix(p$mean)

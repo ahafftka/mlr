@@ -68,7 +68,7 @@ trainLearner.fcregr.auto.arima = function(.learner, .task, .subset, .weights = N
 
   data = getTaskData(.task,.subset, target.extra = TRUE)
   data$target = ts(data$target, start = 1, frequency = .task$task.desc$frequency)
-  if (ncol(data$data) != 0){
+  if (ncol(data$data) != 0) {
     data$data = ts(data$data, start = 1, frequency = .task$task.desc$frequency)
     forecast::auto.arima(y = data$target,xreg = data$data, ...)
   } else {
@@ -81,7 +81,7 @@ trainLearner.fcregr.auto.arima = function(.learner, .task, .subset, .weights = N
 updateLearner.fcregr.auto.arima = function(.learner, .model, .newdata, .task, .truth, .weights = NULL, ...) {
 
   target = ts(.truth, start = 1, frequency = .task$task.desc$frequency)
-  if (ncol(.newdata) == 0){
+  if (ncol(.newdata) == 0) {
     updated = forecast::Arima(y = target, model = .model$learner.model)
   } else {
     xdata = ts(.newdata, start = 1, frequency = .task$task.desc$frequency)
@@ -93,15 +93,15 @@ updateLearner.fcregr.auto.arima = function(.learner, .model, .newdata, .task, .t
 #'@export
 predictLearner.fcregr.auto.arima = function(.learner, .model, .newdata, ...) {
   se.fit = .learner$predict.type == "quantile"
-  model.td = getTaskDescription(.model)
+  model.td = getTaskDesc(.model)
 
-  if (all(model.td$n.feat == 0)){
+  if (all(model.td$n.feat == 0)) {
     p = forecast::forecast(.model$learner.model, ...)
   } else {
     .newdata = ts(.newdata, start = 1, frequency = .model$task.desc$frequency)
     p = forecast::forecast(.model$learner.model, xreg = .newdata, ...)
   }
-  if (!se.fit){
+  if (!se.fit) {
     p = as.numeric(p$mean)
   } else {
     pMean  = as.matrix(p$mean)

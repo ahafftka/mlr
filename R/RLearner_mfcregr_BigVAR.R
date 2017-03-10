@@ -47,7 +47,7 @@ trainLearner.mfcregr.BigVAR = function(.learner, .task, .subset, .weights = NULL
 predictLearner.mfcregr.BigVAR = function(.learner, .model, .newdata, ...){
 
   p = lapply(1:I(.model$learner.model@horizon), function(i){
-    BigVAR::predict(.model$learner.model, i)
+    as.data.frame(BigVAR::predict(.model$learner.model, i))
   })
   p[[1]] = as.data.frame(t(p[[1]]))
   p = rbindlist(p)

@@ -9,8 +9,8 @@ test_that("forecast regression task", {
 })
 
 test_that("Multivariate Forecast learning", {
-  lrn = makeLearner("mfcregr.BigVAR",p = 2, struct = "Basic", gran = c(2, 4),
-                    h = 1, n.ahead = 1)
+  lrn = makeLearner("mfcregr.BigVAR", par.vals = list(p = 2, struct = "Basic", gran = c(2, 4),
+                    h = 1, n.ahead = 1))
 
   # train predict eval
   mod = train(lrn, mfcregr.task)
@@ -18,9 +18,9 @@ test_that("Multivariate Forecast learning", {
   p = performance(pred, task = mfcregr.task)
   expect_true(!is.na(p))
   # resample
-  lrn = makeLearner("mfcregr.BigVAR",p = 2, struct = "Basic", gran = c(2, 4),
-                    h = 3, n.ahead = 3)
-  r = holdout(lrn, mfcregr.task,split = .99)
+  lrn = makeLearner("mfcregr.BigVAR", par.vals = list(p = 2, struct = "Basic", gran = c(2, 4),
+                    h = 3, n.ahead = 3))
+  r = holdout(lrn,task = mfcregr.task,split = .99)
   expect_true(!is.na(r$aggr))
 })
 

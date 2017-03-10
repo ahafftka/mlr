@@ -7,29 +7,29 @@
 #' @template arg_taskdf
 #' @template arg_taskdf_target
 #' @param lag [\code{integer}]\cr
-#'   An integer vector of lag lengths.
+#' An integer vector of lag lengths.
 #' @param difference [\code{integer}]\cr
-#'   An integer of the order of differencing
+#' An integer of the order of differencing
 #' @param cols [\code{character}]\cr
-#'   A character vector of columns to create lag features for.
-#'   Default is to use all columns. NOTE: For forecast regression tasks, it is not
-#'   a good idea to make lags of your target variable. So if cols are not specied by
-#'   the user, createLagDiffFeatures will return a regr task.
+#' A character vector of columns to create lag features for.
+#' Default is to use all columns. NOTE: For forecast regression tasks, it is not
+#' a good idea to make lags of your target variable. So if cols are not specied by
+#' the user, createLagDiffFeatures will return a regr task.
 #' @param seasonal.lag [\code{integer}]\cr
-#'   An integer vector of seasonal lag lengths, made as \code{seasonal.lag * frequency}
+#' An integer vector of seasonal lag lengths, made as \code{seasonal.lag * frequency}
 #' @param seasonal.difference [\code{integer}]\cr
-#'   An integer of the seasonal order of difference, made as \code{seasonal.difference * frequency}
+#' An integer of the seasonal order of difference, made as \code{seasonal.difference * frequency}
 #' @param frequency [\code{integer}]\cr
-#'   An integer representing the periodicity in the time series. If frequency is declared in the task,
-#'   the task frequency will be used.
+#' An integer representing the periodicity in the time series. If frequency is declared in the task,
+#' the task frequency will be used.
 #' @param na.pad [\code{logical}]\cr
-#'   A logical to denote whether the data should be padded to the original size with NAs
+#' A logical to denote whether the data should be padded to the original size with NAs
 #' @param difference.lag [\code{integer}]\cr
-#'   An integer denoting the period to difference over
+#' An integer denoting the period to difference over
 #' @param seasonal.difference.lag [\code{integer}]\cr
-#'   An integer denoting the period to seasonaly difference over
+#' An integer denoting the period to seasonaly difference over
 #' @param return.nonlag [\code{logical}]\cr
-#'   A logical to denote whether the original unlagged features should be returned
+#' A logical to denote whether the original unlagged features should be returned
 #' @export
 #' @family eda_and_preprocess
 #' @examples
@@ -161,7 +161,7 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
   data = getTaskData(obj)
 
   nums = vlapply(data, is.numeric)
-  td = getTaskDescription(obj)
+  td = getTaskDesc(obj)
   if (!is.null(td$frequency) && frequency == 1L)
     frequency = td$frequency
   if (!is.null(cols)){

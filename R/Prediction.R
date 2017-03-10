@@ -196,7 +196,8 @@ makePrediction.CostSensTaskDesc = function(task.desc, row.names, id, truth, pred
 
 #' @export
 #' @importFrom lubridate dseconds int_diff
-makePrediction.ForecastRegrTaskDesc = function(task.desc, row.names, id, truth, predict.type, predict.threshold = NULL, y, time, error = NA_character_) {
+makePrediction.ForecastRegrTaskDesc = function(task.desc, row.names, id, truth, predict.type,
+                                               predict.threshold = NULL, y, time, error = NA_character_, dump = NULL) {
   data = namedList(c("id", "truth", "response", "se"))
   if (any(class(y) == "matrix"))
     size.y = nrow(y)
@@ -240,14 +241,16 @@ makePrediction.ForecastRegrTaskDesc = function(task.desc, row.names, id, truth, 
             threshold = NA_real_,
             task.desc = task.desc,
             time = time,
-            error = error
+            error = error,
+            dump = dump
   )
 }
 
 
 #' @export
 #' @importFrom lubridate dseconds int_diff
-makePrediction.MultiForecastRegrTaskDesc = function(task.desc, row.names, id, truth, predict.type, predict.threshold = NULL, y, time, error = NA_character_) {
+makePrediction.MultiForecastRegrTaskDesc = function(task.desc, row.names, id, truth, predict.type,
+                                                    predict.threshold = NULL, y, time, error = NA_character_, dump = NULL) {
   data = namedList(c("id", "truth", "response", "se"))
   if (class(y) != "matrix"){
     size.y = length(y)
@@ -301,7 +304,8 @@ makePrediction.MultiForecastRegrTaskDesc = function(task.desc, row.names, id, tr
     threshold = NA_real_,
     task.desc = task.desc,
     time = time,
-    error = error
+    error = error,
+    dump = dump
   )
 }
 

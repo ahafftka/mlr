@@ -65,7 +65,7 @@ makeMultiForecastRegrTaskDesc = function(id, data, target, weights, blocking, fr
 
 #' @export
 print.MultiForecastRegrTask = function(x, print.weights = TRUE, ...) {
-  td = getTaskDescription(x)
+  td = getTaskDesc(x)
   catf("Task: %s", td$id)
   catf("Type: %s", td$type)
   catf("Target: %s", stri_paste(td$target, collapse = " "))

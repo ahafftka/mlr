@@ -325,4 +325,3 @@ testSimpleParsetsUpdate = function(t.name, df, target,update.inds, train.inds,
 }
 
 
->>>>>>> Created TimeRegrTask and started on Arima Learner

@@ -96,7 +96,7 @@ suppressWarning = function(expr, str) {
 }
 # combine two data frames by the difference in cns and num
 # typically used in preprocessing for numeric variables
-cbindSetDiff <- function(x, data, cns, nums) {
+cbindSetDiff = function(x, data, cns, nums) {
   x = as.data.frame(x)
   colnames(x) = nums
   data = data[, setdiff(cns, nums), drop = FALSE]

@@ -9,6 +9,8 @@ getTaskDesc = function(x) {
 }
 
 #' Deprecated, use \code{\link{getTaskDesc}} instead.
+#' @template arg_task_or_desc
+#' @return [\code{\link{TaskDesc}}]
 #' @export
 getTaskDescription = function(x) {
   .Deprecated("getTaskDesc")

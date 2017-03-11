@@ -11,7 +11,7 @@ getTaskDescription(x)
 Task or its description object.}
 }
 \value{
-[\code{\link{TaskDesc}}]
+[\code{\link{TaskDesc}}].
 }
 \description{
 Deprecated, use \code{\link{getTaskDesc}} instead.
